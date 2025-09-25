@@ -1,12 +1,12 @@
-export default function Item({ name, quantity, category }) {
+export default function Item({ item }) {
   return (
     <li className="flex justify-between items-center p-4 hover:bg-gray-50">
       <div>
-        <p className="text-lg font-semibold text-gray-800">{name}</p>
-        <p className="text-sm text-gray-500">Category: {category}</p>
+        <p className="text-lg font-semibold text-gray-800">{item.name}</p>
+        <p className="text-sm text-gray-500">Category: {item.category}</p>
       </div>
       <span className="text-sm font-medium text-blue-600">
-        Qty: {quantity}
+        Qty: {item.quantity}
       </span>
     </li>
   );
