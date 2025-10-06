@@ -36,13 +36,13 @@ export default function NewItem() {
         required
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+        className="w-full px-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 text-gray-700"
       />
 
       
       <div className="flex items-center space-x-2">
         
-        <span className="w-10 py-2 border border-gray-300 rounded text-center font-semibold text-sm">
+        <span className="w-10 py-2 border border-gray-300 rounded text-center font-semibold text-sm text-gray-700">
           {quantity}
         </span>
 
@@ -74,19 +74,19 @@ export default function NewItem() {
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="flex-1 px-2 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
+          className="flex-1 px-2 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-600 text-gray-700"
         >
-          <option value="produce">Produce</option>
-          <option value="dairy">Dairy</option>
-          <option value="bakery">Bakery</option>
-          <option value="meat">Meat</option>
-          <option value="frozen foods">Frozen Foods</option>
-          <option value="canned goods">Canned Goods</option>
-          <option value="dry goods">Dry Goods</option>
-          <option value="beverages">Beverages</option>
-          <option value="snacks">Snacks</option>
-          <option value="household">Household</option>
-          <option value="other">Other</option>
+          <option value="produce" className="text-gray-700">Produce</option>
+          <option value="dairy" className="text-gray-700">Dairy</option>
+          <option value="bakery" className="text-gray-700">Bakery</option>
+          <option value="meat" className="text-gray-700">Meat</option>
+          <option value="frozen foods" className="text-gray-700">Frozen Foods</option>
+          <option value="canned goods" className="text-gray-700">Canned Goods</option>
+          <option value="dry goods" className="text-gray-700">Dry Goods</option>
+          <option value="beverages" className="text-gray-700">Beverages</option>
+          <option value="snacks" className="text-gray-700">Snacks</option>
+          <option value="household" className="text-gray-700">Household</option>
+          <option value="other" className="text-gray-700">Other</option>
         </select>
       </div>
 
