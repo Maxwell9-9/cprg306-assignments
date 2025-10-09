@@ -26,10 +26,10 @@ export default function ItemList() {
     } 
 
     const sortItems = function() {
-        console.log("sorting");
+        console.log(sortBy);
         switch (sortBy) {
-            case "name": setSortBy(data.sort(compareByName)); break;
-            case "category": setSortBy(data.sort(compareByCategory)); break;
+            case "name": data.sort(compareByName); break;
+            case "category": data.sort(compareByCategory); break;
         }
     }
 
