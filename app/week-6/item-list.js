@@ -36,16 +36,25 @@ export default function ItemList() {
     
 
     return (
-        <div>
-            <button onClick={() => { setSortBy("name"); sortItems(); }}>Sort by name</button>
-            <button onClick={() => { setSortBy("category"); sortItems(); }}>Sort by category</button>
+        <div className="justify-center gap-2 mb-2">
+            <button className="p-2 mr-2 rounded font-bold bg-blue-500" onClick={() => { setSortBy("name"); sortItems(); }}>Sort by name</button>
+            <button className="p-2 mr-2 rounded font-bold bg-blue-500" onClick={() => { setSortBy("category"); sortItems(); }}>Sort by category</button>
+            <button className="p-2 mr-2 rounded font-bold bg-blue-500" onClick={() => { setSortBy("category"); sortItems(); }}>Group by Category</button>
             <ul>
                 {data.map((item, index) => (
-                    <li key={index}>Name: {item.name}, Category: {item.category}</li>
+                    <li className="flex justify-between items-center p-4 hover:bg-gray-50" key={index}>
+                    <div>
+                        <p className="text-lg font-semibold text-gray-800">{item.name}</p>
+                        <p className="text-sm text-gray-500">Category: {item.category}</p>
+                    </div>
+                    <span className="text-sm font-medium text-blue-600">
+                        Qty: {item.quantity}
+                    </span>
+                    </li>
                 ))}
             </ul>
         </div>
-
+        
     )
 }
 
