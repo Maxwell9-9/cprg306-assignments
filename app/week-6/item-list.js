@@ -7,29 +7,15 @@ export default function ItemList() {
     const [sortBy, setSortBy] = useState("name");
 
 
-    const compareByName = function(a, b) {
-            if (a.name > b.name) {
-                return 1;
-            } else if (a.name < b.name) {
-                return -1;
-            } else {
-                return 0;
-            }
-    }
-    const compareByCategory = function(a, b) {
-            if (a.category > b.category) {
-                return 1;
-            } else if (a.category < b.category) {
-                return -1;
-            } else {
-                return 0;
-            }
-    } 
 
 
-    const sortItems = function(compareMethod) {
-        data.sort(compareMethod);
-    }
+    data.sort((a,b) => {
+        switch (sortBy) {
+            case "name": return a.name.localeCompare(b.name);
+            case "category": return a.category.localeCompare(b.category);
+        }
+    })
+
 
     
 
@@ -37,8 +23,8 @@ export default function ItemList() {
         <div className="justify-center gap-2 mb-2">
 
 
-            <button className={`p-2 mr-2 rounded font-bold text-gray-800 ${sortBy == "name" ? "bg-blue-500" : "bg-gray-500"}`} onClick={() => { setSortBy("name"); sortItems(compareByName); }}>Sort by name</button>
-            <button className={`p-2 mr-2 rounded font-bold  text-gray-800 ${sortBy == "category" ? "bg-blue-500" : "bg-gray-500"}`} onClick={() => { setSortBy("category"); sortItems(compareByCategory); }}>Sort by category</button>
+            <button className={`p-2 mr-2 rounded font-bold text-gray-800 ${sortBy == "name" ? "bg-blue-500" : "bg-gray-500"}`} onClick={() => { setSortBy("name");}}>Sort by name</button>
+            <button className={`p-2 mr-2 rounded font-bold  text-gray-800 ${sortBy == "category" ? "bg-blue-500" : "bg-gray-500"}`} onClick={() => { setSortBy("category");}}>Sort by category</button>
             <ul>
                 {data.map((item, index) => (
                     <li className="flex justify-between items-center p-4 hover:bg-gray-50" key={index}>
