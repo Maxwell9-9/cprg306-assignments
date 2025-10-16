@@ -7,8 +7,6 @@ export default function ItemList() {
     const [sortBy, setSortBy] = useState("name");
 
 
-
-
     data.sort((a,b) => {
         switch (sortBy) {
             case "name": return a.name.localeCompare(b.name);
@@ -16,18 +14,19 @@ export default function ItemList() {
         }
     })
 
-
     
 
     return (
-        <div className="justify-center gap-2 mb-2">
+        <div className="justify-center gap-2 mb-2 px-5">
 
+            <span className="flex flex-row justify-center pb-2">
+                <button className={`p-2 mr-2 rounded font-bold text-gray-800 ${sortBy == "name" ? "bg-blue-500" : "bg-gray-500"}`} onClick={() => { setSortBy("name");}}>Sort by name</button>
+                <button className={`border-p-2 mr-2 rounded font-bold  text-gray-800 ${sortBy == "category" ? "bg-blue-500" : "bg-gray-500"}`} onClick={() => { setSortBy("category");}}>Sort by category</button>
+            </span>
 
-            <button className={`p-2 mr-2 rounded font-bold text-gray-800 ${sortBy == "name" ? "bg-blue-500" : "bg-gray-500"}`} onClick={() => { setSortBy("name");}}>Sort by name</button>
-            <button className={`p-2 mr-2 rounded font-bold  text-gray-800 ${sortBy == "category" ? "bg-blue-500" : "bg-gray-500"}`} onClick={() => { setSortBy("category");}}>Sort by category</button>
-            <ul>
+            <ul className="flex flex-col gap-1">
                 {data.map((item, index) => (
-                    <li className="flex justify-between items-center p-4 hover:bg-gray-50" key={index}>
+                    <li className="flex justify-between items-center p-4 hover:bg-gray-100 bg-gray-50 hover:border-2 rounded-xl" key={index}>
                     <div>
                         <p className="text-lg font-semibold text-gray-800">{item.name}</p>
                         <p className="text-sm text-gray-500">Category: {item.category}</p>
