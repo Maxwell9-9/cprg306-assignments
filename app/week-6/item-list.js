@@ -27,12 +27,8 @@ export default function ItemList() {
     } 
 
 
-    const sortItems = function() {
-        console.log(sortBy);
-        switch (sortBy) {
-            case "name": data.sort(compareByName); break;
-            case "category": data.sort(compareByCategory); break;
-        }
+    const sortItems = function(compareMethod) {
+        data.sort(compareMethod);
     }
 
     
