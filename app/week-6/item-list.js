@@ -6,6 +6,7 @@ import data from "./item.json";
 export default function ItemList() {
     const [sortBy, setSortBy] = useState("name");
 
+
     const compareByName = function(a, b) {
             if (a.name > b.name) {
                 return 1;
@@ -24,10 +25,14 @@ export default function ItemList() {
                 return 0;
             }
     } 
-    
 
-    const sortItems = function(compareMethod) {
-        data.sort(compareMethod);
+
+    const sortItems = function() {
+        console.log(sortBy);
+        switch (sortBy) {
+            case "name": data.sort(compareByName); break;
+            case "category": data.sort(compareByCategory); break;
+        }
     }
 
     
