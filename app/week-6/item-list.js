@@ -6,8 +6,8 @@ import data from "./item.json";
 export default function ItemList() {
     const [sortBy, setSortBy] = useState("name");
 
+
     const compareByName = function(a, b) {
-        console.log("sorting by name");
             if (a.name > b.name) {
                 return 1;
             } else if (a.name < b.name) {
@@ -17,7 +17,6 @@ export default function ItemList() {
             }
     }
     const compareByCategory = function(a, b) {
-        console.log("sorting by category");
             if (a.category > b.category) {
                 return 1;
             } else if (a.category < b.category) {
@@ -26,24 +25,22 @@ export default function ItemList() {
                 return 0;
             }
     } 
-    
 
-    const sortItems = function(compareMethod) {
-        data.sort(compareMethod);
+
+    const sortItems = function() {
+        console.log(sortBy);
+        switch (sortBy) {
+            case "name": data.sort(compareByName); break;
+            case "category": data.sort(compareByCategory); break;
+        }
     }
 
     
 
     return (
         <div className="justify-center gap-2 mb-2">
-<<<<<<< HEAD
             <button className="p-2 mr-2 rounded font-bold bg-blue-500 hover:bg-blue-50 text-gray-800" onClick={() => { setSortBy("name"); sortItems(); }}>Sort by name</button>
             <button className="p-2 mr-2 rounded font-bold bg-blue-500 hover:bg-blue-50 text-gray-800" onClick={() => { setSortBy("category"); sortItems(); }}>Sort by category</button>
-=======
-            <button className="p-2 mr-2 rounded font-bold bg-blue-500 hover:bg-blue-50 text-gray-800" onClick={() => { setSortBy("name"); sortItems(compareByName); }}>Sort by name</button>
-            <button className="p-2 mr-2 rounded font-bold bg-blue-500 hover:bg-blue-50 text-gray-800" onClick={() => { setSortBy("category"); sortItems(compareByCategory); }}>Sort by category</button>
-            <button className="p-2 mr-2 rounded font-bold bg-blue-500 hover:bg-blue-50 text-gray-800" onClick={() => { groupByCategory(); }}>Group by Category</button>
->>>>>>> 859a50d89905a59751486f3271043088b2522659
             <ul>
                 {data.map((item, index) => (
                     <li className="flex justify-between items-center p-4 hover:bg-gray-50" key={index}>
