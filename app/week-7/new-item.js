@@ -27,7 +27,7 @@ export default function NewItem() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white w-96 p-5 rounded shadow-md space-y-4"
+      className="bg-white w-96 p-5 rounded shadow-md mb-2 space-y-4"
     >
       
       <input
