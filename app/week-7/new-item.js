@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-export default function NewItem() {
+export default function NewItem({onAddItem}) {
   const [name, setName] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [category, setCategory] = useState("produce");
@@ -14,6 +14,7 @@ export default function NewItem() {
     setName("");
     setQuantity(1);
     setCategory("produce");
+    onAddItem(item);
   };
 
   const increment = () => {

@@ -3,11 +3,11 @@
 import { useState } from "react";
 import Item from "./item";
 import data from "./item.json";
-export default function ItemList() {
+export default function ItemList({items}) {
     const [sortBy, setSortBy] = useState("name");
 
 
-    data.sort((a,b) => {
+    items.sort((a,b) => {
         switch (sortBy) {
             case "name": return a.name.localeCompare(b.name);
             case "category": return a.category.localeCompare(b.category);
@@ -25,7 +25,7 @@ export default function ItemList() {
             </span>
 
             <ul className="flex flex-col gap-1">
-                {data.map((item, index) => (
+                {items.map((item, index) => (
                     <li className="flex justify-between items-center p-4 hover:bg-gray-100 bg-gray-50 hover:border-2 rounded-xl" key={index}>
                     <div>
                         <p className="text-lg font-semibold text-gray-800">{item.name}</p>
