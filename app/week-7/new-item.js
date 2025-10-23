@@ -10,7 +10,7 @@ export default function NewItem({onAddItem}) {
     event.preventDefault();
     const item = { name, quantity, category };
     console.log(item);
-    alert(`Item added: ${name}\nQuantity: ${quantity}\nCategory: ${category}`);
+    // alert(`Item added: ${name}\nQuantity: ${quantity}\nCategory: ${category}`);
     setName("");
     setQuantity(1);
     setCategory("produce");
