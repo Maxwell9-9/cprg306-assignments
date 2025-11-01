@@ -17,12 +17,15 @@ async function fetchMealIdeas(ingredient) {
 
 export default function MealIdeas({ ingredient }) {
   const [meals, setMeals] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!ingredient) return;
     async function loadMealIdeas() {
+      setLoading(true);
       const mealResults = await fetchMealIdeas(ingredient);
       setMeals(mealResults);
+      setLoading(false);
     }
     loadMealIdeas();
   }, [ingredient]);
@@ -41,15 +44,23 @@ export default function MealIdeas({ ingredient }) {
       <h2 className="text-xl font-bold text-gray-800 mb-3">
         Meal Ideas for "{ingredient}"
       </h2>
-      <ul className="list-disc list-inside space-y-2">
-        {meals.map((meal) => (
-          <li
-            key={meal.idMeal}
-            className="text-gray-800 font-medium hover:text-blue-600 cursor-pointer" >
-            {meal.strMeal}
-          </li>
-        ))}
-      </ul>
+
+      {loading ? (
+        <p className="text-gray-500">Loading meal ideas...</p>
+      ) : meals.length === 0 ? (
+        <p className="text-gray-500">No meals found.</p>
+      ) : (
+        <ul className="list-disc list-inside space-y-2">
+          {meals.map((meal) => (
+            <li
+              key={meal.idMeal}
+              className="text-gray-800 font-medium hover:text-blue-600 cursor-pointer"
+            >
+              {meal.strMeal}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
