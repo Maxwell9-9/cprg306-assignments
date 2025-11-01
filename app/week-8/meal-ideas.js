@@ -42,7 +42,7 @@ export default function MealIdeas({ ingredient }) {
   return (
     <div className="bg-white p-4 rounded shadow-md w-full">
       <h2 className="text-xl font-bold text-gray-800 mb-3">
-        Meal Ideas for "{ingredient}"
+        {`Meal Ideas for "${ingredient}"`}
       </h2>
 
       {loading ? (
