@@ -1,42 +1,55 @@
-"use client"
+"use client";
 
-import { useState } from "react";
-import Item from "./item";
-import data from "./item.json";
-export default function ItemList({items}) {
-    const [sortBy, setSortBy] = useState("name");
+import { useState, useEffect } from "react";
 
+async function fetchMealIdeas(ingredient) {
+  try {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
+    );
+    const data = await response.json();
+    return data.meals || [];
+  } catch (error) {
+    console.error("Error fetching meals:", error);
+    return [];
+  }
+}
 
-    items.sort((a,b) => {
-        switch (sortBy) {
-            case "name": return a.name.localeCompare(b.name);
-            case "category": return a.category.localeCompare(b.category);
-        }
-    })
+export default function MealIdeas({ ingredient }) {
+  const [meals, setMeals] = useState([]);
 
-    
+  useEffect(() => {
+    if (!ingredient) return;
+    async function loadMealIdeas() {
+      const mealResults = await fetchMealIdeas(ingredient);
+      setMeals(mealResults);
+    }
+    loadMealIdeas();
+  }, [ingredient]);
 
+  if (!ingredient) {
     return (
-        <div className="justify-center gap-2 mb-2 px-5">
+      <div className="bg-white p-4 rounded shadow-md w-full">
+        <h2 className="text-xl font-bold text-gray-800 mb-2">Meal Ideas</h2>
+        <p className="text-gray-500">Select an item to see meal ideas.</p>
+      </div>
+    );
+  }
 
-            <span className="flex flex-row justify-center pb-2">
-                <button className={`p-2 mr-2 rounded font-bold text-gray-800 ${sortBy == "name" ? "bg-blue-500" : "bg-gray-500"}`} onClick={() => { setSortBy("name");}}>Sort by name</button>
-                <button className={`border-p-2 mr-2 rounded font-bold  text-gray-800 ${sortBy == "category" ? "bg-blue-500" : "bg-gray-500"}`} onClick={() => { setSortBy("category");}}>Sort by category</button>
-            </span>
-
-            <ul className="flex flex-col gap-1">
-                {items.map((item, index) => (
-                    <li className="flex justify-between items-center p-4 hover:bg-gray-100 bg-gray-50 hover:border-2 rounded-xl" key={index}>
-                    <div>
-                        <p className="text-lg font-semibold text-gray-800">{item.name}</p>
-                        <p className="text-sm text-gray-500">Category: {item.category}</p>
-                    </div>
-                    <span className="text-sm font-medium text-blue-600">
-                        Qty: {item.quantity}
-                    </span>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    )
+  return (
+    <div className="bg-white p-4 rounded shadow-md w-full">
+      <h2 className="text-xl font-bold text-gray-800 mb-3">
+        Meal Ideas for "{ingredient}"
+      </h2>
+      <ul className="list-disc list-inside space-y-2">
+        {meals.map((meal) => (
+          <li
+            key={meal.idMeal}
+            className="text-gray-800 font-medium hover:text-blue-600 cursor-pointer" >
+            {meal.strMeal}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
