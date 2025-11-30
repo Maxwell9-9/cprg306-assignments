@@ -5,14 +5,19 @@ import ItemList from './item-list';
 import NewItem from './new-item';
 import MealIdeas from './meal-ideas';
 import { useUserAuth } from "../../../_utils/auth-context";
-import {getItems, addItem} from '../../_services/shopping-list-services';
+import {getItems, addItem, deleteItem} from '../_services/shopping-list-services';
 import { useEffect } from 'react';
 
 export default function Page() {
-  const [items, setItems] = useState(itemsData);
+  const [items, setItems] = useState([]);
   const [selectedItemName, setSelectedItemName] = useState("");
 
   const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
+
+  const onDeleteItem = async (itemId) => {
+    await deleteItem(user.uid, itemId);
+    await loadItems();
+  }
 
   const loadItems =  async () => {
     if (!user) {
@@ -63,7 +68,7 @@ export default function Page() {
           <div className="flex flex-col md:flex-row gap-6">
             <div className="flex-1">
               <NewItem onAddItem={handleAddItem}/>
-              <ItemList items={items} onItemSelect={handleItemSelect}/>
+              <ItemList items={items} onItemSelect={handleItemSelect} onDeleteItem={onDeleteItem} />
             </div>
             <div className="flex-1">
               <MealIdeas ingredient={selectedItemName}/>
