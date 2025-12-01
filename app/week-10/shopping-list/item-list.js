@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Item from "./item";
 
-export default function ItemList({ items, onItemSelect }) {
+export default function ItemList({ items, onItemSelect, onDeleteItem }) {
   const [sortBy, setSortBy] = useState("name");
 
   items.sort((a, b) => {
@@ -36,7 +36,7 @@ export default function ItemList({ items, onItemSelect }) {
 
       <ul className="flex flex-col gap-1">
         {items.map((item, index) => (
-          <Item key={index} item={item} onSelect={onItemSelect} />
+          <Item key={index} item={item} onSelect={onItemSelect} onDelete={onDeleteItem} />
         ))}
       </ul>
     </div>
